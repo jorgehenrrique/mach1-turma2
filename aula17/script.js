@@ -78,7 +78,30 @@ function salvarProduto (){
 botaoSalvar.onclick = () => {
   if (camposPreenchidos()) { // Se for true
     salvarProduto()
+    feedbackUsuario() // Chama a funcao que mostra cadastrado com sucesso
   } else { // senao 
     console.log('Campos não preenchidos')
   }
+}
+
+// ------------- alterações para teste
+let feedback = document.querySelector('#feedback-usuario');
+let listaCadastrada = document.querySelector('#lista-produtos');
+
+botaoConcluir.onclick = () => { // 8 - Ao clicar no concluir cadastramento, esconder o form e exibir a lista
+    document.querySelector('form').style.display = 'none';
+    document.querySelector('.inativo').style.display = 'block';
+    exibirListaCadastrada()
+};
+
+
+function exibirListaCadastrada() { // Exibir lista de produtos cadastrados
+        for (let i = 0; i < listaProdutos.length; i++) {
+            listaCadastrada.innerHTML += `<li> Produto ${i} - codigo: ${listaProdutos[i].codigo}, nome: ${listaProdutos[i].nome}, descricao: ${listaProdutos[i].descricao}, preco: ${listaProdutos[i].preco}</li>`
+        }
+}
+
+function feedbackUsuario() { // 6 - E exibir uma mensagem de produto cadastrado com sucesso
+    feedback.removeAttribute('hidden'); // Remove hiddem da div
+    feedback.innerHTML = `<p> Produto cadastrado com sucesso! </p>`; // adc paragrafo com mensagem na div
 }
